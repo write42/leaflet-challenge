@@ -3,7 +3,6 @@ var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_we
 d3.json(queryUrl).then(function(response){
     //console.log(response)
     features = response.features
-
     function featurePop(featureData,layer){
         layer.bindPopup("<h3>"+featureData.properties.place +
         "</h3><hr><p>"+ new Date(featureData.properties.time)+"</p>")
@@ -13,11 +12,14 @@ d3.json(queryUrl).then(function(response){
     
         pointToLayer: (featureData, latlng) => 
         {
-          //console.log(featureData)
+          console.log(featureData)
           //return L.marker(latlng)
-          
+          var quakeMag = featureData.geometry.coordinates[2]
+          var color = "";
+
           return L.circle(latlng,
-            {radius: featureData.properties.mag*10000}
+            {radius: featureData.properties.mag*10000,
+            fillColor:color}
             )
         }
     });
