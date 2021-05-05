@@ -7,6 +7,7 @@ d3.json(queryUrl).then(function(response){
         layer.bindPopup("<h3>"+featureData.properties.place +
         "</h3><hr><p>"+ new Date(featureData.properties.time)+"</p>")
     }
+    
     var earthquakes = L.geoJSON(features, {
         onEachFeature: featurePop,
     
@@ -14,12 +15,9 @@ d3.json(queryUrl).then(function(response){
         {
           console.log(featureData)
           //return L.marker(latlng)
-          var quakeMag = featureData.geometry.coordinates[2]
-          var color = "";
 
           return L.circle(latlng,
-            {radius: featureData.properties.mag*10000,
-            fillColor:color}
+            {radius: featureData.properties.mag*10000}
             )
         }
     });
@@ -60,8 +58,13 @@ d3.json(queryUrl).then(function(response){
     collapsed: false
   }).addTo(myMap);
 
+  var info = L.control({
+    position:'bottomright'
+  });
 
+  info.onAdd = function(){
+    var div = L.DomUtil.create('div','legend');
+    return div;
+  };
+  info.addTo(myMap);
 })
-
-
-
