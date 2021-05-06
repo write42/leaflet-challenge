@@ -1,3 +1,33 @@
+function circleColor(mag) {
+  var color = "";
+  switch (true) {
+    case (mag >= -10 && mag < 10):
+      color = '#00FF00';
+      break;
+    case (mag >= 10 && mag < 30):
+      color = '#B3FF00';
+      break;
+    case (mag >= 30 && mag < 50):
+      color = '#F0FF00';
+      break;
+    case (mag >= 50 && mag < 70):
+      color = '#FFB100';
+      break;
+    case (mag >= 70 && mag < 90):
+      color = '#FF8300';
+      break;
+    case (mag >= 90):
+      color = '#FF1300';
+      break;
+    default:
+      color = '#000000';
+      break;
+  }
+
+  console.log(color)
+  return color;
+}
+
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson"
 
 d3.json(queryUrl).then(function(response){
@@ -7,32 +37,7 @@ d3.json(queryUrl).then(function(response){
         layer.bindPopup("<h3>"+featureData.properties.place +
         "</h3><hr><p>"+ new Date(featureData.properties.time)+"</p>")
     }
-    var color = "";
-    function circleColor(mag) {
-      switch (true) {
-        case (mag >= -10 && mag < 10):
-          color = '00FF00';
-          break;
-        case (mag >= 10 && mag < 30):
-          color = 'B3FF00';
-          break;
-        case (mag >= 30 && mag < 50):
-          color = 'F0FF00';
-          break;
-        case (mag >= 50 && mag < 70):
-          color = 'FFB100';
-          break;
-        case (mag >= 70 && mag < 90):
-          color = 'FF8300';
-          break;
-        case (mag >= 90):
-          color = 'FF1300';
-          break;
-        default:
-          color = '000000';
-          break;
-      }
-    }
+ 
     var earthquakes = L.geoJSON(features, {
         onEachFeature: featurePop,
     
@@ -42,6 +47,7 @@ d3.json(queryUrl).then(function(response){
           //return L.marker(latlng)
           var depth = featureData.geometry.coordinates[2]
           console.log(depth)
+          console.log(typeof depth)
           return L.circle(latlng,
             {radius: featureData.properties.mag*10000,
             color:'black',
