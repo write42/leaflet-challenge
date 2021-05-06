@@ -10,22 +10,22 @@ d3.json(queryUrl).then(function(response){
     var color = "";
     function circleColor(mag) {
       switch (true) {
-        case (x >= -10 && x < 10):
+        case (mag >= -10 && mag < 10):
           color = '00FF00';
           break;
-        case (x >= 10 && x < 30):
+        case (mag >= 10 && mag < 30):
           color = 'B3FF00';
           break;
-        case (x >= 30 && x < 50):
+        case (mag >= 30 && mag < 50):
           color = 'F0FF00';
           break;
-        case (x >= 50 && x < 70):
+        case (mag >= 50 && mag < 70):
           color = 'FFB100';
           break;
-        case (x >= 70 && x < 90):
+        case (mag >= 70 && mag < 90):
           color = 'FF8300';
           break;
-        case (x >= 90):
+        case (mag >= 90):
           color = 'FF1300';
           break;
         default:
@@ -38,11 +38,14 @@ d3.json(queryUrl).then(function(response){
     
         pointToLayer: (featureData, latlng) => 
         {
-          console.log(featureData)
+          //console.log(featureData)
           //return L.marker(latlng)
-          //depth of earthquake = featureData.geometry.coordinates[2]
+          var depth = featureData.geometry.coordinates[2]
+          console.log(depth)
           return L.circle(latlng,
-            {radius: featureData.properties.mag*10000}
+            {radius: featureData.properties.mag*10000,
+            color:'black',
+            fillColor: circleColor(depth)}
             )
         }
     });
