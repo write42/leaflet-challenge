@@ -7,7 +7,32 @@ d3.json(queryUrl).then(function(response){
         layer.bindPopup("<h3>"+featureData.properties.place +
         "</h3><hr><p>"+ new Date(featureData.properties.time)+"</p>")
     }
-    
+    var color = "";
+    function circleColor(mag) {
+      switch (true) {
+        case (x >= -10 && x < 10):
+          color = '00FF00';
+          break;
+        case (x >= 10 && x < 30):
+          color = 'B3FF00';
+          break;
+        case (x >= 30 && x < 50):
+          color = 'F0FF00';
+          break;
+        case (x >= 50 && x < 70):
+          color = 'FFB100';
+          break;
+        case (x >= 70 && x < 90):
+          color = 'FF8300';
+          break;
+        case (x >= 90):
+          color = 'FF1300';
+          break;
+        default:
+          color = '000000';
+          break;
+      }
+    }
     var earthquakes = L.geoJSON(features, {
         onEachFeature: featurePop,
     
@@ -15,7 +40,7 @@ d3.json(queryUrl).then(function(response){
         {
           console.log(featureData)
           //return L.marker(latlng)
-
+          //depth of earthquake = featureData.geometry.coordinates[2]
           return L.circle(latlng,
             {radius: featureData.properties.mag*10000}
             )
