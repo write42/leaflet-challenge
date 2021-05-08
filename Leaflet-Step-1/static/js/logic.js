@@ -72,7 +72,7 @@ d3.json(queryUrl).then(function(response){
     accessToken: API_KEY
   });
   var baseMaps = {
-    "Street Map": streetmap,
+    "Light Map": streetmap,
     "Dark Map": darkmap
   };
 
@@ -96,7 +96,7 @@ d3.json(queryUrl).then(function(response){
     position:'bottomright'
   });
 
-  info.onAdd = function(){
+  info.onAdd = function(map){
     var div = L.DomUtil.create('div','legend');
     return div;
   };
