@@ -115,7 +115,8 @@ d3.json(queryUrl).then(function(response){
     colors = ['#00FF00','#B3FF00','#F0FF00','#FFB100','#FF8300','#FF1300'];
     for (var i=0; i < categories.length; i++) {
       div.innerHTML += 
-      '<i style ="background:' + getColor(categories[i]) + '"></i>' + (categories[i+1] ? '&ndash;' + categories[i+1] + '<br>': '+');
+      '<i style ="background:' + colors[i] + '"></i>' + 
+      categories[i] + (categories[i+1] ? '&ndash;' + '<br>': '+');
     }
     //div.innerHTML = labels.join('</br>')
     return div;
