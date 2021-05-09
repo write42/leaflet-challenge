@@ -110,7 +110,7 @@ d3.json(queryUrl).then(function(response){
 
   legend.onAdd = function(myMap){
     var div = L.DomUtil.create('div','legend'),
-    labels = ['<strong>Depth</strong>'],
+
     categories = ['-10-10','10-30','30-50','50-70','70-90','90+'];
     colors = ['#00FF00','#B3FF00','#F0FF00','#FFB100','#FF8300','#FF1300'];
     for (var i=0; i < categories.length; i++) {
