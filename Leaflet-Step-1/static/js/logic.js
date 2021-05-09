@@ -94,7 +94,7 @@ d3.json(queryUrl).then(function(response){
 
   var myMap = L.map("mapid", {
     center: [
-      37.09, -95.71
+      36.97, -122.03
     ],
     zoom: 5,
     layers: [lightmap, earthquakes]
